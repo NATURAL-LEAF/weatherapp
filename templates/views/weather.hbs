@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="60">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{>headerlinks}}
+</head>
+<body>
+    {{>navbar}}
+    <!-- main-header -->
+    <div class="conatiner-fluid main_header">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+                <div class="main_content">
+                    <form class="temp_form">
+                        <input type="text" id="cityName" placeholder="Enter Your City Name" autocomplete="off">
+                        <input type="submit" value="search" id="submitBtn">
+                    </form>
+                </div>
+                <div class="tempInformatiom">
+                    <div class="top_layer">
+                        <p id="day">Monday</p>
+                        <p id="today_date">24 MAY</p>
+                    </div>
+                    <div class="main_layer">
+                        <p id="city_name"> Get Output Here </p>
+                        <div class="middle_layer data_hide">
+                            <p id="temp"> <span id="temp_real_val">0</span><sup>o</sup>C</p>
+                            <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
+    <!-- footer  -->
+    <div class="refreshmessaege"> 
+        <p>(Page will be refreshed automatically every minute)</p>
+    </div>
+    {{>footer}}
+
+    <script src="js/main.js"></script>
+    <script>
+        const getCurrentDay = () => {
+            var weekday = new Array(7);
+                weekday[0] = "SunDAY";
+                weekday[1] = "MONDAY";
+                weekday[2] = "TUESDAY";
+                weekday[3] = "WEDNESDAY";
+                weekday[4] = "THURSDAY";
+                weekday[5] = "FRIDAY";
+                weekday[6] = "SATURDAY";
+            let currentTime=new Date();
+            let dy=(weekday[currentTime.getDay()]);
+            let day=document.getElementById('day');
+            day.innerText=dy;
+        };
+        getCurrentDay();
+
+        const getCurrentTime = () =>{
+            var months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            var now=new Date();
+            var month=months[now.getMonth()];
+            var day=now.getDate();
+            let hour=now.getHours();
+            let min=now.getMinutes();
+            let period="AM";
+            if(hour>11)
+            {
+                period="PM"
+                if(hour>12)
+                {
+                    hour-=12;
+                }
+            }
+            if(min<10)
+            {
+                min="0"+min;
+            }
+            // console.log(month+"|"+day);
+            curDate = `${month} ${day}  |  ${hour}:${min} ${period}`;
+            let currtime=document.getElementById('today_date');
+            currtime.innerText=curDate;
+        };
+        getCurrentTime();
+    </script>
+</body>
+</html>
